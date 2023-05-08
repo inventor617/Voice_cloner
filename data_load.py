@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#/usr/bin/python2
+
 '''
 By kyubyong park. kbpark.linguist@gmail.com. 
 https://www.github.com/kyubyong/dc_tts
@@ -15,21 +15,25 @@ import codecs
 import re
 import os
 import unicodedata
+import sys
 
 def load_vocab():
     char2idx = {char: idx for idx, char in enumerate(hp.vocab)}
     idx2char = {idx: char for idx, char in enumerate(hp.vocab)}
+    print('char2idx',char2idx)
+    print('idx2char',idx2char)
     return char2idx, idx2char
-
+load_vocab()
 def text_normalize(text):
-    text = ''.join(char for char in unicodedata.normalize('NFD', text)
-                           if unicodedata.category(char) != 'Mn') # Strip accents
+    text = ''.join(char for char in unicodedata.normalize('NFC', text)
+                   if unicodedata.category(char) != 'Mn')# Strip accents
 
     text = text.lower()
     text = re.sub("[^{}]".format(hp.vocab), " ", text)
     text = re.sub("[ ]+", " ", text)
+    print('text',text)
     return text
-
+text_normalize(u'PE абвгдеёжзийклмнопрстуфхцчшщъыьэюя')
 def load_data(mode="train"):
     '''Loads data
       Args:
@@ -44,6 +48,7 @@ def load_data(mode="train"):
             fpaths, text_lengths, texts = [], [], []
             transcript = os.path.join(hp.data, 'transcript.csv')
             lines = codecs.open(transcript, 'r', 'utf-8').readlines()
+            print(lines)
             for line in lines:
                 fname, _, text = line.strip().split("|")
 
@@ -54,7 +59,6 @@ def load_data(mode="train"):
                 text = [char2idx[char] for char in text]
                 text_lengths.append(len(text))
                 texts.append(np.array(text, np.int32).tostring())
-
             return fpaths, text_lengths, texts
         else: # nick or kate
             # Parse

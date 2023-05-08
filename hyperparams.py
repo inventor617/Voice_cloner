@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#/usr/bin/python2
+
 '''
 By kyubyong park. kbpark.linguist@gmail.com. 
 https://www.github.com/kyubyong/dc_tts
@@ -32,19 +32,21 @@ class Hyperparams:
     attention_win_size = 3
 
     # data
-    data = r"C:\Users\Sax\Desktop\robe\Progetti\TTS\modello inglese\TTS\LJSpeech-1.1"
+    data = r"C:\Users\inven\Voice_cloner-myChanges\LJ"
     # data = "/data/private/voice/kate"
     test_data = 'harvard_sentences.txt'
-    vocab = "PE abcdefghijklmnopqrstuvwxyz'.?" # P: Padding, E: EOS.
+    vocab = u"PE абвгдеёжзийклмнопрстуфхцчшщъыьэюя-.?"
+    #vocab = "PE АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя'.?"# P: Padding, E: EOS.
+    #vocab = "PE abcdefghijklmnopqrstuvwxyz'.?"
     #max_N = 180 # Maximum number of characters.
     #max_T = 210 # Maximum number of mel frames.
     max_N = 143
     max_T = 120
 
     # training scheme
-    lr = 0.001 # Initial learning rate.
-    lang = "ENG"
+    lr = 1e-3 # Initial learning rate.
+    lang = "RU"
     logdir = "logdir/LJ01"
     sampledir = 'samples'
-    B = 16 # batch size
+    B = 1 # batch size
     num_iterations = 1000

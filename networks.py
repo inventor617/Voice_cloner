@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#/usr/bin/python2
+
 '''
 By kyubyong park. kbpark.linguist@gmail.com. 
 https://www.github.com/kyubyong/dc_tts
@@ -83,7 +83,7 @@ def AudioEnc(S, training=True):
                     filters=hp.d,
                     size=1,
                     rate=1,
-                    padding="CAUSAL",
+                    padding="SAME",
                     dropout_rate=hp.dropout_rate,
                     activation_fn=tf.nn.relu,
                     training=training,
@@ -91,7 +91,7 @@ def AudioEnc(S, training=True):
     tensor = conv1d(tensor,
                     size=1,
                     rate=1,
-                    padding="CAUSAL",
+                    padding="SAME",
                     dropout_rate=hp.dropout_rate,
                     activation_fn=tf.nn.relu,
                     training=training,
@@ -99,7 +99,7 @@ def AudioEnc(S, training=True):
     tensor = conv1d(tensor,
                     size=1,
                     rate=1,
-                    padding="CAUSAL",
+                    padding="SAME",
                     dropout_rate=hp.dropout_rate,
                     training=training,
                     scope="C_{}".format(i)); i += 1
@@ -108,7 +108,7 @@ def AudioEnc(S, training=True):
             tensor = hc(tensor,
                             size=3,
                             rate=3**j,
-                            padding="CAUSAL",
+                            padding="SAME",
                             dropout_rate=hp.dropout_rate,
                             training=training,
                             scope="HC_{}".format(i)); i += 1
@@ -116,7 +116,7 @@ def AudioEnc(S, training=True):
         tensor = hc(tensor,
                         size=3,
                         rate=3,
-                        padding="CAUSAL",
+                        padding="SAME",
                         dropout_rate=hp.dropout_rate,
                         training=training,
                         scope="HC_{}".format(i)); i += 1
@@ -168,7 +168,7 @@ def AudioDec(R, training=True):
                     filters=hp.d,
                     size=1,
                     rate=1,
-                    padding="CAUSAL",
+                    padding="SAME",
                     dropout_rate=hp.dropout_rate,
                     training=training,
                     scope="C_{}".format(i)); i += 1
@@ -176,7 +176,7 @@ def AudioDec(R, training=True):
         tensor = hc(tensor,
                         size=3,
                         rate=3**j,
-                        padding="CAUSAL",
+                        padding="SAME",
                         dropout_rate=hp.dropout_rate,
                         training=training,
                         scope="HC_{}".format(i)); i += 1
@@ -185,7 +185,7 @@ def AudioDec(R, training=True):
         tensor = hc(tensor,
                         size=3,
                         rate=1,
-                        padding="CAUSAL",
+                        padding="SAME",
                         dropout_rate=hp.dropout_rate,
                         training=training,
                         scope="HC_{}".format(i)); i += 1
@@ -193,7 +193,7 @@ def AudioDec(R, training=True):
         tensor = conv1d(tensor,
                         size=1,
                         rate=1,
-                        padding="CAUSAL",
+                        padding="SAME",
                         dropout_rate=hp.dropout_rate,
                         activation_fn=tf.nn.relu,
                         training=training,
@@ -203,7 +203,7 @@ def AudioDec(R, training=True):
                     filters=hp.n_mels,
                     size=1,
                     rate=1,
-                    padding="CAUSAL",
+                    padding="SAME",
                     dropout_rate=hp.dropout_rate,
                     training=training,
                     scope="C_{}".format(i)); i += 1

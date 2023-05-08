@@ -6,12 +6,12 @@ import keyboard
 
 chunk = 1024  
 sample_format = pyaudio.paInt16  
-channels = 2
+channels = 1
 fs = 44100  
 seconds = 11 # max duration
 
 # read the file and cycle for each sentence
-with open("transcript.csv", "r") as f:
+with open("transcript.csv", "r", encoding='utf-8') as f:
     for line in f:
         tokens = line.split("|")
         index = tokens[0]

@@ -1,10 +1,3 @@
-# -*- coding: utf-8 -*-
-# /usr/bin/python2
-'''
-By kyubyong park. kbpark.linguist@gmail.com.
-https://www.github.com/kyubyong/dc_tts
-'''
-
 from __future__ import print_function
 
 import os
@@ -67,5 +60,3 @@ if __name__ == '__main__':
     lang = sys.argv[1] # ITA or ENG
     synthesize(lang)
     print("Done")
-
-
